@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 
-
 class SecondScreen extends StatefulWidget {
   String title;
   SecondScreen({super.key, required this.title});
