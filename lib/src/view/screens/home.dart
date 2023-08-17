@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:september/src/view/screens/second_page.dart';
 import 'package:september/src/view/screens/texts.dart';
 
@@ -11,13 +12,15 @@ HomeScreen({super.key});
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-TextEditingController _inputController = TextEditingController();
+TextEditingController _emailInputController = TextEditingController();
+TextEditingController _passwordInputController = TextEditingController();
 
 final formKey = GlobalKey<FormState>();
 
 bool hidePassword = true;
 
 RegExp gmailValidation = RegExp(r'@gmail.com');
+RegExp paasswordValidaton = RegExp(r"[a-z0-9]");
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +30,17 @@ RegExp gmailValidation = RegExp(r'@gmail.com');
         appBar: AppBar(
           title: Text(appName),
         ),
-        body: Column(
+        body:
+         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Text("Home Screen", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              child:Icon(Icons.person, size: 150),
+            ),
+          ),
+          // Text("Home Screen", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Form(
@@ -47,7 +57,7 @@ RegExp gmailValidation = RegExp(r'@gmail.com');
                       height: 10,
                     ),
                   TextFormField(
-                    controller: _inputController,
+                    controller: _emailInputController,
                     validator: (value){
                       if(value == null || value.isEmpty){
                         return"This field is required";
@@ -58,23 +68,51 @@ RegExp gmailValidation = RegExp(r'@gmail.com');
                         return null;
                       }
                     },
-                    obscureText: hidePassword,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.email),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          hidePassword = !hidePassword;
-                          setState(() {});
-                        },
-                        icon: Icon(hidePassword
-                        ?Icons.remove_red_eye:
-                        Icons.remove_red_eye_outlined),
-                      ),
                       hintText: "Please enter your email",
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),),
                     ),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Password",
+                    style: TextStyle(fontSize:16, fontWeight: FontWeight.bold ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: _passwordInputController,
+                      validator: (value){
+                        if(value == null || value.isEmpty){
+                          return"Password required";
+                        } else if(!paasswordValidaton.hasMatch(value)){
+                          return "Please enter corrrect password";
+                        }
+                        else{
+                          return null;
+                        }
+                      },
+                      obscureText: hidePassword,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
+                         suffixIcon: IconButton(
+                          onPressed: () {
+                            hidePassword = !hidePassword;
+                            setState(() {});
+                          },
+                          icon: Icon(hidePassword
+                          ?Icons.remove_red_eye:
+                          Icons.remove_red_eye_outlined),
+                        ),
+                        hintText: "Please enter your password",
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),)
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -84,10 +122,18 @@ RegExp gmailValidation = RegExp(r'@gmail.com');
               if(formKey.currentState!.validate())
               Navigator.of(context).push(
                 MaterialPageRoute(builder: ((context) => SecondScreen(
-                  title: _inputController.text,
-               ))));
+                  title: "Welcome to second screen"
+                )
+              )
+             )
+            );
           }, 
-          child: Text("Tap me"))
+          child: Text("Log in")
+          ),
+         TextButton(
+            onPressed: (){}, 
+            child: Text("Forgot password ?")
+          ),
          ],
         ),
       ),

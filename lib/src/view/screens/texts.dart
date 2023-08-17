@@ -1,1 +1,1 @@
-const String appName ="My App";
+const String appName ="Parshant_app";
