@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:september/src/view/screens/home.dart';
+import 'package:september/src/view/screens/splash.dart';
 
 class ValidatorProject extends StatelessWidget {
   const ValidatorProject({super.key});
@@ -7,7 +7,7 @@ class ValidatorProject extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }

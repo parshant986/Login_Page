@@ -1,6 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:september/src/view/screens/register.dart';
 import 'package:september/src/view/screens/second_page.dart';
 import 'package:september/src/view/screens/texts.dart';
+import 'package:september/src/view/utilis/colors.dart';
 
 class HomeScreen extends StatefulWidget {
 	HomeScreen({super.key});
@@ -108,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
 									 hintText: "Please enter your password",
 									 border: OutlineInputBorder(
 										borderRadius: BorderRadius.circular(20),
-									 )),
+									 ),),
 							 ),
 							)
 						],
@@ -124,6 +127,16 @@ class _HomeScreenState extends State<HomeScreen> {
 					 },
 					 child: Text("Log in")),
 				TextButton(onPressed: () {}, child: Text("Forgot password ?")),
+				RichText(text: TextSpan(children: [
+					TextSpan(text:"Not Registered?", 
+					style: TextStyle(color: kRedColor)),
+					TextSpan(text: "Reigister", 
+					recognizer:TapGestureRecognizer()
+					..onTap =() {
+					  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RegisterScreen()));
+					},
+					style: TextStyle(color: kBlackColor, fontWeight: FontWeight.bold)),
+				]))
 			 ],
 			),
 		),
