@@ -9,7 +9,8 @@ class RegisterScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(onPressed: (){
           Navigator.pop(context);
-        }, child: Text("Go to login")),
+        }, child: Text("Go to login")
+        ),
       ),
     );
   }
